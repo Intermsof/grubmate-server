@@ -5,6 +5,7 @@ var postModel = new Schema({
     postID: String,
     location: String,
     title: String,
+    time: String,
     images:[String],
     status:Boolean,
     user:{
@@ -18,7 +19,9 @@ var postModel = new Schema({
     category:String,
     tag:String,
     numAvailable:Number,
-    pending:[String]
+    pending:[String],
+    confirmed:[String],
+    groups:[String]
 });
 
 module.exports = mongoose.model("Post", postModel);
