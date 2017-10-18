@@ -4,8 +4,6 @@
     <list default="true" id="4cf55b78-df67-4687-a73c-64751fa3f860" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.js" afterPath="$PROJECT_DIR$/index.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/models/userModel.js" afterPath="$PROJECT_DIR$/models/userModel.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/routes/apiRoutes.js" afterPath="$PROJECT_DIR$/routes/apiRoutes.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -23,7 +21,7 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="package.json" pinned="false" current-in-tab="false">
+      <file leaf-file-name="package.json" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/package.json">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="238">
@@ -36,17 +34,17 @@
       <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="544">
-              <caret line="32" column="23" lean-forward="true" selection-start-line="32" selection-start-column="23" selection-end-line="32" selection-end-column="23" />
+            <state relative-caret-position="119">
+              <caret line="7" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="apiRoutes.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="apiRoutes.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/routes/apiRoutes.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="517">
+            <state relative-caret-position="1870">
               <caret line="128" column="24" lean-forward="true" selection-start-line="128" selection-start-column="24" selection-end-line="128" selection-end-column="24" />
               <folding />
             </state>
@@ -128,9 +126,9 @@
         <option value="$PROJECT_DIR$/models/groupModel.js" />
         <option value="$PROJECT_DIR$/models/notificationModel.js" />
         <option value="$PROJECT_DIR$/models/postModel.js" />
-        <option value="$PROJECT_DIR$/index.js" />
         <option value="$PROJECT_DIR$/models/userModel.js" />
         <option value="$PROJECT_DIR$/routes/apiRoutes.js" />
+        <option value="$PROJECT_DIR$/index.js" />
       </list>
     </option>
   </component>
@@ -293,12 +291,12 @@
       <updated>1507613266005</updated>
       <workItem from="1507613267505" duration="2840000" />
       <workItem from="1508019649868" duration="36133000" />
-      <workItem from="1508164190486" duration="12908000" />
+      <workItem from="1508164190486" duration="13134000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="51881000" />
+    <option name="totallyTimeSpent" value="52107000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -444,14 +442,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/package.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="14" column="21" lean-forward="false" selection-start-line="14" selection-start-column="21" selection-end-line="14" selection-end-column="21" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/models/postModel.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
@@ -486,16 +476,24 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="544">
-          <caret line="32" column="23" lean-forward="true" selection-start-line="32" selection-start-column="23" selection-end-line="32" selection-end-column="23" />
+        <state relative-caret-position="119">
+          <caret line="7" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/routes/apiRoutes.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="517">
+        <state relative-caret-position="1870">
           <caret line="128" column="24" lean-forward="true" selection-start-line="128" selection-start-column="24" selection-end-line="128" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="14" column="21" lean-forward="false" selection-start-line="14" selection-start-column="21" selection-end-line="14" selection-end-column="21" />
           <folding />
         </state>
       </provider>
