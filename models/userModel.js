@@ -12,6 +12,7 @@ var userModel = new Schema({
     friends:[String],
     valid:[{type:Boolean}],
     notifications:[String],
+    postsOfUser:[String]
 });
 
 userModel.pre('save', function (next) {

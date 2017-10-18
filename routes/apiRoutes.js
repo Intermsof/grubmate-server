@@ -44,7 +44,14 @@ var routes = function (Post,User,Group,Notification) {
         })
     });
 
-    router.route("/posts").post(function (req,res) {
+    router.route("/posts").get(function(req,res){
+        var userid = req.query.userid;
+        console.log(userid);
+        User.findById(userid,function (err,user) {
+            console.log(user);
+            res.json(user.posts);
+        });
+    }).post(function (req,res) {
         var post = new Post(req.body);
         var postUser = post.user;
         var userid = postUser.id;
@@ -59,6 +66,8 @@ var routes = function (Post,User,Group,Notification) {
                     user.posts.push(post._id);
                     res.send(post);
                 }
+                user.postsOfUser.push(post._id);
+                user.update({$set:{postsOfUser: user.postsOfUser}});
                 if(post.groups.length === 0){
                     var friends = user.friends;
                     for(let friend of friends){
@@ -102,8 +111,10 @@ var routes = function (Post,User,Group,Notification) {
         })
     });
 
-    router.route("posts/single/:postId").get(function (req,res) {
-        Post.findById(req.params.postId,function(err,post){
+    router.route("/single").get(function (req,res) {
+        console.log("called");
+        var postId =  req.query.postid;
+        Post.findById(postId,function(err,post){
             if(err){
                 console.log(err);
             } else{
