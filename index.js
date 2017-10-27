@@ -18,18 +18,7 @@ var Notification = require("./models/notificationModel");
 app.use(bodyParser.json());
 
 var router = require("./routes/apiRoutes")(Post,User,Group,Notification);
-app.get("/a",function (req,res) {
-    Test.findById("1",function (err,test) {
-        test.fuck = [true,true,false,false];
-        test.save();
-    });
-}).post("/a",function (req,res) {
-    var test = new Test(req.body);
-    test.save(function () {
-        console.log("trying to save");
-    });
-    res.json(test);
-});
+
 app.use("/api",router);
 
 app.get("/",function (req,res) {

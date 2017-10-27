@@ -7,7 +7,10 @@ var userModel = new Schema({
     rating:Number,
     posts:[String],
     requests:[String],
-    subs:[String],
+    subs:[{
+        type:String,
+        value:String
+    }],
     groups:[String],
     friends:[String],
     valid:[{type:Boolean}],
@@ -15,11 +18,5 @@ var userModel = new Schema({
     postsOfUser:[String]
 });
 
-userModel.pre('save', function (next) {
-    if ('invalid' == this.name) {
-        return next(new Error('#sadpanda'));
-    }
-    next();
-});
 
 module.exports = mongoose.model("User",userModel);

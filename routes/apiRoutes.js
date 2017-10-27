@@ -3,7 +3,8 @@ var express = require("express");
 var routes = function (Post,User,Group,Notification) {
     var router = express.Router();
 
-    router.route("/user").post(function(req,res){
+    router.route("/user")
+        .post(function(req,res){
         var user = new User(req.body);
         var userFriends = user.friends;
         var done = 0;
@@ -33,7 +34,8 @@ var routes = function (Post,User,Group,Notification) {
                 }
             });
         }
-    }).get(function(req,res){
+    })
+        .get(function(req,res){
         var userid = req.query.userid;
         User.findById(userid,function (err,user) {
             if(err){
@@ -44,14 +46,16 @@ var routes = function (Post,User,Group,Notification) {
         })
     });
 
-    router.route("/posts").get(function(req,res){
+    router.route("/posts")
+        .get(function(req,res){
         var userid = req.query.userid;
         console.log(userid);
         User.findById(userid,function (err,user) {
             console.log(user);
             res.json(user.posts);
         });
-    }).post(function (req,res) {
+    })
+        .post(function (req,res) {
         var post = new Post(req.body);
         var postUser = post.user;
         var userid = postUser.id;
@@ -82,7 +86,8 @@ var routes = function (Post,User,Group,Notification) {
                 }
             }
         });
-    }).put(function (req,res) {
+    })
+        .put(function (req,res) {
         var options = req.body;
         Post.findById(options.id,function (err,post) {
             if(err){
@@ -111,7 +116,8 @@ var routes = function (Post,User,Group,Notification) {
         })
     });
 
-    router.route("/single").get(function (req,res) {
+    router.route("/single")
+        .get(function (req,res) {
         console.log("called");
         var postId =  req.query.postid;
         Post.findById(postId,function(err,post){
@@ -122,6 +128,82 @@ var routes = function (Post,User,Group,Notification) {
             }
         });
     });
+
+    router.route("/groupsingle")
+        .get(function (req,res) {
+            var groupid = req.query.groupid;
+            Group.findById(groupid,function (err,group) {
+                res.json(group);
+            })
+        });
+
+    router.route("/group")
+        .get(function (req,res) {
+            var userid = req.query.userid;
+            User.findById(userid,function (err,user) {
+                res.json(user.group);
+            });
+        })
+        .post(function (req,res) {
+            var group = new Group(req.body);
+            group.save();
+            var userid = group.users[0];
+            console.log(userid);
+            User.findById(userid,function (err,user) {
+                user.groups.push(group._id);
+                user.update({$set:{groups:user.groups}},{},function () {
+                    console.log("updated");
+                });
+            });
+            res.json(group);
+        })
+        .put(function (req,res) {
+            var groupid = req.query.groupid;
+            var add = req.query.add;
+            var userid = req.query.userid;
+            Group.findById(groupid,function (err,group) {
+                if(add == 1){
+                    //case: join group
+                    group.users.push(userid);
+                }else{
+                    //case: exit group
+                    var index = group.users.indexOf(userid);
+                    User.findById(userid,function (err,user) {
+                        console.log(userid);
+                        user.groups.splice(user.groups.indexOf(groupid),1);
+                        user.update({$set:{groups:user.groups}},{},function () {
+                            console.log("updated");
+                        })
+                    });
+                    group.users.splice(index, 1);
+                }
+                group.update({$set:{users:group.users}},{},function () {
+                    console.log("updated");
+                    res.json(group);
+                })
+            });
+
+        });
+
+    router.route("/subs")
+        .post(function(req,res){
+            var userid = req.query.userid;
+            var sub = new Sub(req.body);
+            sub.save();
+            User.findById(userid,function (err,user) {
+                user.subs.push(sub);
+                user.update({$set:{subs:user.subs}},{},function () {
+                   console.log("updated");
+                });
+            })
+        })
+        .put(function (req,res) {
+            var index = req.query.index;
+            var userid = req.query.userid;
+            User.findById(userid,function (err,user){
+                user.subs.splice(index,1);
+            });
+        });
 
     return router;
 };
