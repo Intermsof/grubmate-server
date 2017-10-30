@@ -57,7 +57,7 @@ var routes = function (Post,User,Group,Notifications) {
         })
         .post(function (req,res) {
             var post = new Post(req.body);
-            var postUser = post.user;
+            var postUser = req.body.user;
             var userid = postUser.id;
             console.log(post);
             post.save();
