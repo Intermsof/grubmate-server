@@ -1,6 +1,6 @@
 var express = require("express");
 
-var routes = function (Post,User,Group,Notification) {
+var routes = function (Post,User,Group,Notifications) {
     var router = express.Router();
 
     router.route("/user")
@@ -48,73 +48,129 @@ var routes = function (Post,User,Group,Notification) {
 
     router.route("/posts")
         .get(function(req,res){
-        var userid = req.query.userid;
-        console.log(userid);
-        User.findById(userid,function (err,user) {
-            console.log(user);
-            res.json(user.posts);
-        });
-    })
+            var userid = req.query.userid;
+            console.log(userid);
+            User.findById(userid,function (err,user) {
+                console.log(user);
+                res.json(user.posts);
+            });
+        })
         .post(function (req,res) {
-        var post = new Post(req.body);
-        var postUser = post.user;
-        var userid = postUser.id;
-        console.log(post);
-        post.save();
-        User.findById(userid,function (err,user) {
-            if(err){
-                console.log(err);
-            }else{
-                if(post._id){
-                    console.log(user);
-                    user.posts.push(post._id);
-                    res.send(post);
-                }
-                user.postsOfUser.push(post._id);
-                user.update({$set:{postsOfUser: user.postsOfUser}});
-                if(post.groups.length === 0){
-                    var friends = user.friends;
-                    for(let friend of friends){
-                        User.findById(friend,function (err,friendObj) {
-                            friendObj.posts.push(post._id);
-                            friendObj.update({ $set: {posts: friendObj.posts}},{},function () {
-                                console.log("updated");
+            var post = new Post(req.body);
+            var postUser = post.user;
+            var userid = postUser.id;
+            console.log(post);
+            post.save();
+            User.findById(userid,function (err,user) {
+                if(err){
+                    console.log(err);
+                }else{
+                    if(post._id){
+                        console.log(user);
+                        user.posts.push(post._id);
+                        res.send(post);
+                    }
+                    user.postsOfUser.push(post._id);
+                    user.update({$set:{postsOfUser: user.postsOfUser}},{},function () {
+                        console.log("updated");
+                    });
+                    if(post.groups.length === 0){
+                        var friends = user.friends;
+                        for(let friend of friends){
+                            User.findById(friend,function (err,friendObj) {
+                                friendObj.posts.push(post._id);
+                                //logic for setting up notifications
+                                var notification = new Notifications({
+                                    type:"news",
+                                    title:post.title,
+                                    address:post.location,
+                                    postid:post._id
+                                });
+                                notification.save();
 
+                                friendObj.update({ $set: {posts: friendObj.posts}},{},function () {
+                                    console.log("updated");
+                                });
+
+                                friendObj.notifications.push(notification._id);
+                                friendObj.update({$set:{notifications:friendObj.notifications}},{},function () {
+                                    console.log("updated");
+                                });
+
+
+                            });
+                        }
+                    }
+                }
+            });
+        })
+        .put(function (req,res) {
+            var type = req.query.type;
+            var personid = req.query.personid;
+            var postid = req.query.postid;
+            var location = req.query.location;
+            Post.findById(postid,function (err,post) {
+                if(err){
+                    console.log(err);
+                }else{
+                    if(type === "confirm"){
+                        post.confirmed.push(personid);
+                        post.update({$set:{confirmed:post.confirmed}},{},function () {
+                            console.log("updated");
+                        });
+
+                        //give a notification to that user
+                        User.findById(personid,function (err,user) {
+                            var notification = new Notifications({
+                                type:"status",
+                                title:"your request for " + post.title + " has been confirmed",
+                                status:"confirmed",
+                                postid:post._id
+                            });
+
+                            notification.save();
+                            res.json(notification);
+                            user.notifications.push(notification._id);
+                            user.update({$set:{notifications:user.notifications}},{},function () {
+                                console.log("updated");
+                            });
+                        });
+
+                    }else if(type === "end"){
+                        var index = post.confirmed.indexOf(personid);
+                        var confirmed = post.confirmed;
+                        post.confirmed = confirmed.slice(0,index).concat(confirmed.slice(index + 1));
+                        post.update({$set:{confirmed:post.confirmed}},{},function () {
+                            console.log("updated");
+                        });
+
+
+                    }else if(type === "request"){
+                        post.pending.push(personid);
+                        post.update({$set:{pending:post.pending}},{},function () {
+                            console.log("updated");
+                        });
+
+                        //give a notification to that user
+                        User.findById(post.user.id,function (err,user) {
+                            var notification = new Notifications({
+                                type:"request",
+                                title: (user.name + " requested your " + post.title),
+                                address:location,
+                                postid:post._id
+                            });
+
+                            notification.save();
+                            res.json(notification);
+                            user.notifications.push(notification._id);
+                            user.update({$set:{notifications:user.notifications}},{},function () {
+                                console.log("updated");
                             });
                         });
                     }
                 }
-            }
+            });
         });
-    })
-        .put(function (req,res) {
-        var options = req.body;
-        Post.findById(options.id,function (err,post) {
-            if(err){
-                console.log(err);
-            }else{
-                var type = options.type;
-                if(type === "confirm"){
-                    post.confirmed.push(options.personId);
-                    post.update({$set:{confirmed:post.confirmed}},{},function () {
-                        console.log("updated");
-                    });
-                }else if(type === "end"){
-                    var index = post.confirmed.indexOf(options.personId);
-                    var confirmed = post.confirmed;
-                    post.confirmed = confirmed.slice(0,index).concat(confirmed.slice(index + 1));
-                    post.update({$set:{confirmed:post.confirmed}},{},function () {
-                        console.log("updated");
-                    });
-                }else if(type === "request"){
-                    post.pending.push(options.personId);
-                    post.update({$set:{pending:post.pending}},{},function () {
-                        console.log("updated");
-                    });
-                }
-            }
-        })
-    });
 
     router.route("/single")
         .get(function (req,res) {
@@ -182,7 +238,6 @@ var routes = function (Post,User,Group,Notification) {
                     res.json(group);
                 })
             });
-
         });
 
     router.route("/subs")
@@ -203,6 +258,34 @@ var routes = function (Post,User,Group,Notification) {
             User.findById(userid,function (err,user){
                 user.subs.splice(index,1);
             });
+        });
+
+    router.route("/notifications")
+        .get(function (req,res) {
+            var userid = req.query.userid;
+            User.findById(userid,function (err,user) {
+                if(err){
+                    console.log("got fucked");
+                }else{
+                    console.log(user);
+                    res.json(user.notifications);
+                }
+            });
+        });
+
+    router.route("/singlenotif")
+        .get(function(req,res){
+            var notifid= req.query.notifid;
+            console.log(notifid);
+            Notifications.findById(notifid,function (err,notif) {
+                console.log(notif);
+                res.json(notif);
+            });
+        })
+        .post(function (req,res) {
+            var notif = new Notifications(req.body);
+            notif.save();
+            res.json(notif);
         });
 
     return router;

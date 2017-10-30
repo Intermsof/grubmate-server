@@ -4,9 +4,9 @@ var Schema = mongoose.Schema;
 var notificationModel = new Schema({
     type:String,
     title:String,
-    location:String,
+    address:String,
     status:String,
-    time:String
+    postid:String
 });
 
 module.exports = mongoose.model("Notification",notificationModel);
