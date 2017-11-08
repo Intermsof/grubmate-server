@@ -11,6 +11,7 @@ var routes = function (Post,User,Group,Notifications) {
             for(let i = 0; i < userFriends.length; ++i){
                 var id = userFriends[i];
                 User.findById(id,function (err,friend) {
+                    console.log("here");
                     if (!err && friend != null) {
                         console.log("editting friend");
                         user.valid[i] = true;
@@ -205,14 +206,16 @@ var routes = function (Post,User,Group,Notifications) {
         .post(function (req,res) {
             var group = new Group(req.body);
             group.save();
-            var userid = group.users[0];
-            console.log(userid);
-            User.findById(userid,function (err,user) {
-                user.groups.push(group._id);
-                user.update({$set:{groups:user.groups}},{},function () {
-                    console.log("updated");
+            var users = group.users;
+            for(let userid of users){
+                User.findById(userid,function (err,user) {
+                    user.groups.push(group._id);
+                    user.update({$set:{groups:user.groups}},{},function () {
+                        console.log("updated");
+                    });
                 });
-            });
+            }
+
             res.json(group);
         })
         .put(function (req,res) {
@@ -238,7 +241,7 @@ var routes = function (Post,User,Group,Notifications) {
                 group.update({$set:{users:group.users}},{},function () {
                     console.log("updated");
                     res.json(group);
-                })
+                });
 
                 res.json(group);
             });
