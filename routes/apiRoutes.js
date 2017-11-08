@@ -5,36 +5,36 @@ var routes = function (Post,User,Group,Notifications) {
 
     router.route("/user")
         .post(function(req,res){
-        var user = new User(req.body);
-        var userFriends = user.friends;
-        var done = 0;
-        for(let i = 0; i < userFriends.length; ++i){
-            var id = userFriends[i];
-            User.findById(id,function (err,friend) {
-                if (!err && friend != null) {
-                    console.log("editting friend");
-                    user.valid[i] = true;
-                    var friendOfFriend = friend.friends;
-                    //sets the user as valid for the friend of this user
-                    for(let j = 0; j < friendOfFriend.length; ++j){
-                        if(friendOfFriend[j] === user._id){
-                            friend.valid[j] = true;
-                            friend.update({ $set: {valid: friend.valid}},{},function () {
-                                console.log("updated");
-                            });
+            var user = new User(req.body);
+            var userFriends = user.friends;
+            var done = 0;
+            for(let i = 0; i < userFriends.length; ++i){
+                var id = userFriends[i];
+                User.findById(id,function (err,friend) {
+                    if (!err && friend != null) {
+                        console.log("editting friend");
+                        user.valid[i] = true;
+                        var friendOfFriend = friend.friends;
+                        //sets the user as valid for the friend of this user
+                        for(let j = 0; j < friendOfFriend.length; ++j){
+                            if(friendOfFriend[j] === user._id){
+                                friend.valid[j] = true;
+                                friend.update({ $set: {valid: friend.valid}},{},function () {
+                                    console.log("updated");
+                                });
+                            }
                         }
+                    } else {
+                        user.valid[i] = false;
                     }
-                } else {
-                    user.valid[i] = false;
-                }
-                done++;
-                if(done == userFriends.length){
-                    user.save();
-                    res.send(user);
-                }
-            });
-        }
-    })
+                    done++;
+                    if(done == userFriends.length){
+                        user.save();
+                        res.json(user);
+                    }
+                });
+            }
+        })
         .get(function(req,res){
         var userid = req.query.userid;
         User.findById(userid,function (err,user) {
@@ -143,7 +143,9 @@ var routes = function (Post,User,Group,Notifications) {
                         post.update({$set:{confirmed:post.confirmed}},{},function () {
                             console.log("updated");
                         });
-
+                        res.json({
+                            postid:"59f675251571510012e17a67"
+                        });
 
                     }else if(type === "request"){
                         post.pending.push(personid);
@@ -237,6 +239,8 @@ var routes = function (Post,User,Group,Notifications) {
                     console.log("updated");
                     res.json(group);
                 })
+
+                res.json(group);
             });
         });
 
