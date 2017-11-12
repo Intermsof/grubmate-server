@@ -6,15 +6,33 @@ var userModel = new Schema({
     _id:String,
     rating:Number,
     posts:[String],
-    requests:[String],
     subs:[{
-        type:String,
+        subtype:String,
         value:String
     }],
     groups:[String],
     friends:[String],
     valid:[{type:Boolean}],
-    notifications:[String],
+    news:[{
+        title:String,
+        address:String,
+        postid:String
+    }],
+    requests:[{
+        title:String,
+        address:String,
+        //status should take on requested/confirmed
+        status:String,
+        postid:String,
+        //person requesting
+        personid:String
+    }],
+    statuses:[{
+        title:String,
+        //requested, confirmed, rejected or ended
+        status:String,
+        postid:String
+    }],
     postsOfUser:[String]
 });
 
