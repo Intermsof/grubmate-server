@@ -5,16 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4cf55b78-df67-4687-a73c-64751fa3f860" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/routes/groupRoutes.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/routes/notificationRoutes.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/routes/postRoutes.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/routes/subscriptionRoutes.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/routes/userRoutes.js" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/models/notificationModel.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/routes/apiRoutes.js" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.js" afterPath="$PROJECT_DIR$/index.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/models/userModel.js" afterPath="$PROJECT_DIR$/models/userModel.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -34,7 +25,7 @@
     <splitter split-orientation="horizontal" split-proportion="0.6751081">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file leaf-file-name="postRoutes.js" pinned="false" current-in-tab="true">
+          <file leaf-file-name="postRoutes.js" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/routes/postRoutes.js">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="315">
@@ -114,11 +105,11 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
+          <file leaf-file-name="index.js" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/index.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="408">
-                  <caret line="24" column="79" lean-forward="false" selection-start-line="24" selection-start-column="79" selection-end-line="24" selection-end-column="79" />
+                <state relative-caret-position="136">
+                  <caret line="8" column="0" lean-forward="false" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
                   <folding />
                 </state>
               </provider>
@@ -195,13 +186,13 @@
         <option value="$PROJECT_DIR$/models/newsModel.js" />
         <option value="$PROJECT_DIR$/models/requestsModel.js" />
         <option value="$PROJECT_DIR$/models/statusModel.js" />
-        <option value="$PROJECT_DIR$/index.js" />
         <option value="$PROJECT_DIR$/models/userModel.js" />
         <option value="$PROJECT_DIR$/routes/groupRoutes.js" />
         <option value="$PROJECT_DIR$/routes/subscriptionRoutes.js" />
         <option value="$PROJECT_DIR$/routes/userRoutes.js" />
         <option value="$PROJECT_DIR$/routes/notificationRoutes.js" />
         <option value="$PROJECT_DIR$/routes/postRoutes.js" />
+        <option value="$PROJECT_DIR$/index.js" />
       </list>
     </option>
   </component>
@@ -405,7 +396,7 @@
       <workItem from="1509395912603" duration="17531000" />
       <workItem from="1510121279595" duration="9420000" />
       <workItem from="1510334387259" duration="22652000" />
-      <workItem from="1510456253163" duration="7072000" />
+      <workItem from="1510456253163" duration="7102000" />
     </task>
     <servers />
   </component>
@@ -442,7 +433,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="154232000" />
+    <option name="totallyTimeSpent" value="154262000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -816,14 +807,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="24" column="79" lean-forward="false" selection-start-line="24" selection-start-column="79" selection-end-line="24" selection-end-column="79" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/models/postModel.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="204">
@@ -895,6 +878,14 @@
           <folding>
             <element signature="e#0#45#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" column="0" lean-forward="false" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
