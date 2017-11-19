@@ -81,11 +81,13 @@ var postRoutes = function(User,Post,Group){
             var personid = req.query.personid;
             var postid = req.query.postid;
             var location = req.query.location;
+            console.log(type, personid, postid, location);
             Post.findById(postid,function (err,post) {
                 if(err){
                     console.log(err);
                 }else if(post !== null){
                     if(type === "confirm"){
+                        console.log("confirming");
                         //check the person is has requested and isn't confirmed yet
                         if(post.pending.indexOf(personid) !== -1 && post.confirmed.indexOf(personid) === -1){
                             post.confirmed.push(personid);
@@ -212,10 +214,6 @@ var postRoutes = function(User,Post,Group){
                                 });
 
                             });
-
-
-
-
                         }
                     }else if(type === "reject"){
                         var index = post.pending.indexOf(personid);
