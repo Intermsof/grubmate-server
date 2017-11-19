@@ -234,6 +234,20 @@ var postRoutes = function(User,Post,Group){
                                 });
                             });
 
+                            //remove request from poster
+                            User.findById(post.user.id,function (err,user) {
+                                user.update({
+                                    $pull:{
+                                        requests:{
+                                            postid:postid,
+                                            personid:personid
+                                        }
+                                    }
+                                },{},function () {
+                                    console.log("removed request from user with id " + post.user.id );
+                                });
+                            });
+
 
                         }
                     }else if(type === "edit"){
