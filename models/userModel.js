@@ -5,6 +5,10 @@ var userModel = new Schema({
     name:String,
     _id:String,
     rating:Number,
+    numRating:{
+        type:Number,
+        default:0
+    },
     posts:[String],
     subs:[{
         subtype:String,

@@ -56,6 +56,22 @@ var userRoutes = function(User,Post,Group){
                 res.json(user);
             }
         });
+    }).put(function (req,res) {
+        //this function is for updating ratings
+        var userid = req.query.userid;
+        var rating = req.query.rate;
+        User.findById(userid,function (err,user) {
+            user.rating = (user.rating * user.numRating + rating) / (user.numRating + 1);
+            user.numRating += 1;
+            user.update({
+                $set:{
+                    rating:user.rating,
+                    numRating:user.numRating
+                }
+            },{},function () {
+                console.log("updated the rating of the user with id " + userid);
+            });
+        });
     });
 
     return router;
