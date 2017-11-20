@@ -64,7 +64,8 @@ var userRoutes = function(User,Post,Group){
             console.log(user);
             user.rating = (user.rating * user.numRating + rating) / (user.numRating + 1);
             user.numRating += 1;
-            res.send(user.rating);
+
+            res.json(user.rating);
             user.update({
                 $set:{
                     rating:user.rating,
