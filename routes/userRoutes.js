@@ -61,6 +61,7 @@ var userRoutes = function(User,Post,Group){
         var userid = req.query.userid;
         var rating = req.query.rate;
         User.findById(userid,function (err,user) {
+            console.log(user);
             user.rating = (user.rating * user.numRating + rating) / (user.numRating + 1);
             user.numRating += 1;
             res.send(user.rating);
