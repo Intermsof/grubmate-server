@@ -16,6 +16,7 @@ var groupRoutes = function (User,Post,Group) {
             var group = new Group(req.body);
             group.save();
             var users = group.users;
+            console.log(group);
             for(let userid of users){
                 User.findById(userid,function (err,user) {
                     user.groups.push(group._id);
