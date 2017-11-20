@@ -63,6 +63,7 @@ var userRoutes = function(User,Post,Group){
         User.findById(userid,function (err,user) {
             user.rating = (user.rating * user.numRating + rating) / (user.numRating + 1);
             user.numRating += 1;
+            res.send(user.rating);
             user.update({
                 $set:{
                     rating:user.rating,
