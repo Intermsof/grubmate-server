@@ -10,6 +10,7 @@ var groupRoutes = function (User,Post,Group) {
             var userid = req.query.userid;
             User.findById(userid,function (err,user) {
                 res.json(user.groups);
+                console.log(user.groups);
             });
         })
         .post(function (req,res) {
