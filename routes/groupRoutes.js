@@ -37,7 +37,7 @@ var groupRoutes = function (User,Post,Group) {
                 if(type === "add"){
                     //case: join group
                     //verifies that the user isn't already in the group
-                    console.log(group.user.indexOf(userid));
+                    console.log(group.users.indexOf(userid));
                     if(group.users.indexOf(userid) == -1){
                         group.users.push(userid);
                         console.log(group);
