@@ -37,21 +37,26 @@ var groupRoutes = function (User,Post,Group) {
                 if(type === "add"){
                     //case: join group
                     //verifies that the user isn't already in the group
+                    console.log(group.user.indexOf(userid));
                     if(group.users.indexOf(userid) == -1){
                         group.users.push(userid);
+                        console.log(group);
                         group.update({$set:{users:group.users}},{},function () {
                             console.log("added user the userid " + userid + " to group with id " + groupid);
                         });
                     }
                     User.findById(userid,function (err,user) {
                         //verifies that the group isn't already in the group
-                        if(user.groups.indexOf(groupid) == -1){
-                            //add user object to group
-                            user.groups.push(groupid);
-                            user.update({$set:{groups:user.groups}},{},function () {
-                                console.log("added the group id " + groupid + " to the user with id " + userid);
-                            });
+                        if(user != null){
+                            if(user.groups.indexOf(groupid) == -1){
+                                //add user object to group
+                                user.groups.push(groupid);
+                                user.update({$set:{groups:user.groups}},{},function () {
+                                    console.log("added the group id " + groupid + " to the user with id " + userid);
+                                });
+                            }
                         }
+
                     });
 
                 }else{
@@ -60,10 +65,13 @@ var groupRoutes = function (User,Post,Group) {
                     if(index != -1){
                         //delete the group from the user
                         User.findById(userid,function (err,user) {
-                            user.groups.splice(user.groups.indexOf(groupid),1);
-                            user.update({$set:{groups:user.groups}},{},function () {
-                                console.log("removed group id " + groupid + " from user with id " + userid);
-                            })
+                            if(user != null){
+                                user.groups.splice(user.groups.indexOf(groupid),1);
+                                user.update({$set:{groups:user.groups}},{},function () {
+                                    console.log("removed group id " + groupid + " from user with id " + userid);
+                                });
+                            }
+
                         });
 
                         //remove the user from the group

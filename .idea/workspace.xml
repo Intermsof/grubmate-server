@@ -6,7 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="4cf55b78-df67-4687-a73c-64751fa3f860" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/routes/userRoutes.js" afterPath="$PROJECT_DIR$/routes/userRoutes.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/routes/groupRoutes.js" afterPath="$PROJECT_DIR$/routes/groupRoutes.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -27,7 +27,7 @@
       <file leaf-file-name="postRoutes.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/routes/postRoutes.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
+            <state relative-caret-position="4148">
               <caret line="246" column="87" lean-forward="false" selection-start-line="246" selection-start-column="87" selection-end-line="246" selection-end-column="87" />
               <folding>
                 <element signature="e#0#45#0" expanded="false" />
@@ -39,7 +39,7 @@
       <file leaf-file-name="subscriptionRoutes.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/routes/subscriptionRoutes.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
+            <state relative-caret-position="51">
               <caret line="5" column="50" lean-forward="false" selection-start-line="5" selection-start-column="50" selection-end-line="5" selection-end-column="50" />
               <folding>
                 <element signature="e#0#45#0" expanded="false" />
@@ -48,11 +48,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="userRoutes.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="userRoutes.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/routes/userRoutes.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="504">
-              <caret line="77" column="0" lean-forward="true" selection-start-line="77" selection-start-column="0" selection-end-line="77" selection-end-column="0" />
+            <state relative-caret-position="446">
+              <caret line="77" column="0" lean-forward="false" selection-start-line="77" selection-start-column="0" selection-end-line="77" selection-end-column="0" />
               <folding>
                 <element signature="e#0#45#0" expanded="false" />
               </folding>
@@ -60,11 +60,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="groupRoutes.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="groupRoutes.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/routes/groupRoutes.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="408">
-              <caret line="35" column="57" lean-forward="true" selection-start-line="35" selection-start-column="57" selection-end-line="35" selection-end-column="57" />
+            <state relative-caret-position="300">
+              <caret line="39" column="60" lean-forward="false" selection-start-line="39" selection-start-column="60" selection-end-line="39" selection-end-column="60" />
               <folding>
                 <element signature="e#0#45#0" expanded="false" />
               </folding>
@@ -117,7 +117,7 @@
       <file leaf-file-name="userModel.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/models/userModel.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
+            <state relative-caret-position="170">
               <caret line="10" column="6" lean-forward="false" selection-start-line="10" selection-start-column="6" selection-end-line="10" selection-end-column="6" />
               <folding />
             </state>
@@ -163,9 +163,9 @@
         <option value="$PROJECT_DIR$/routes/notificationRoutes.js" />
         <option value="$PROJECT_DIR$/index.js" />
         <option value="$PROJECT_DIR$/routes/postRoutes.js" />
-        <option value="$PROJECT_DIR$/routes/groupRoutes.js" />
         <option value="$PROJECT_DIR$/models/userModel.js" />
         <option value="$PROJECT_DIR$/routes/userRoutes.js" />
+        <option value="$PROJECT_DIR$/routes/groupRoutes.js" />
       </list>
     </option>
   </component>
@@ -199,7 +199,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -256,6 +255,7 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
       <pane id="Scratches" />
     </panes>
   </component>
@@ -372,7 +372,8 @@
       <workItem from="1510456253163" duration="7456000" />
       <workItem from="1511028914292" duration="768000" />
       <workItem from="1511072567631" duration="6042000" />
-      <workItem from="1511169488022" duration="4111000" />
+      <workItem from="1511169488022" duration="4721000" />
+      <workItem from="1511252067253" duration="468000" />
     </task>
     <servers />
   </component>
@@ -409,7 +410,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="165537000" />
+    <option name="totallyTimeSpent" value="166615000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -701,7 +702,7 @@
     <entry file="file://$PROJECT_DIR$/routes/apiRoutes.js" />
     <entry file="file://$PROJECT_DIR$/routes/postRoutes.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
+        <state relative-caret-position="4148">
           <caret line="246" column="87" lean-forward="false" selection-start-line="246" selection-start-column="87" selection-end-line="246" selection-end-column="87" />
           <folding>
             <element signature="e#0#45#0" expanded="false" />
@@ -745,18 +746,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/routes/subscriptionRoutes.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
+        <state relative-caret-position="51">
           <caret line="5" column="50" lean-forward="false" selection-start-line="5" selection-start-column="50" selection-end-line="5" selection-end-column="50" />
-          <folding>
-            <element signature="e#0#45#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/routes/groupRoutes.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="35" column="57" lean-forward="true" selection-start-line="35" selection-start-column="57" selection-end-line="35" selection-end-column="57" />
           <folding>
             <element signature="e#0#45#0" expanded="false" />
           </folding>
@@ -765,7 +756,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/models/userModel.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
+        <state relative-caret-position="170">
           <caret line="10" column="6" lean-forward="false" selection-start-line="10" selection-start-column="6" selection-end-line="10" selection-end-column="6" />
           <folding />
         </state>
@@ -773,8 +764,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/routes/userRoutes.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="504">
-          <caret line="77" column="0" lean-forward="true" selection-start-line="77" selection-start-column="0" selection-end-line="77" selection-end-column="0" />
+        <state relative-caret-position="446">
+          <caret line="77" column="0" lean-forward="false" selection-start-line="77" selection-start-column="0" selection-end-line="77" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#45#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes/groupRoutes.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="39" column="60" lean-forward="false" selection-start-line="39" selection-start-column="60" selection-end-line="39" selection-end-column="60" />
           <folding>
             <element signature="e#0#45#0" expanded="false" />
           </folding>
