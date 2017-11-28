@@ -76,7 +76,9 @@ var postRoutes = function(User,Post,Group){
                         for(let groupid of groups){
                             Group.findById(groupid,function (err,group) {
                                 var usersOfGroup = group.users;
+                                console.log(usersOfGroup);
                                 for(let userid2 of usersOfGroup){
+                                    console.log(userid2);
                                     if(userid2 != userid){
                                         User.findById(userid2,addPostToUser);
                                     }
