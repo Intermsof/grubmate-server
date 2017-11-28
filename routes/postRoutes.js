@@ -275,6 +275,13 @@ var postRoutes = function(User,Post,Group){
 
                             //update the status of the rejected user
                             User.findById(personid,function (err,user) {
+                                for(let i = 0; i < user.statuses.length; ++i){
+                                    if(user.statuses[i].status === post._id){
+                                        console.log("im here222");
+                                        user.statuses[i].status = "rejected";
+                                        break;
+                                    }
+                                }
                                 for(let status of user.statuses){
                                     if(status.postid === post._id){
                                         console.log("im here");
