@@ -92,6 +92,7 @@ var postRoutes = function(User,Post,Group){
                                             var subscriptions = friendObj.subs;
                                             var match = false;
                                             for(let sub of subscriptions){
+                                                console.log(sub);
                                                 if(sub.subtype === "category" && sub.value === post.category){
                                                     match = true;
                                                 }else if(sub.subtype === "tag" && sub.value === post.tag){
