@@ -102,6 +102,8 @@ var postRoutes = function(User,Post,Group){
                                                 }
                                             }
 
+                                            console.log("am i matching?" , userid2,match);
+
                                             if(match){
                                                 var news = {
                                                     title: user.name + " made a post called \"" + post.title +"\"",
