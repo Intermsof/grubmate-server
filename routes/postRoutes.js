@@ -76,8 +76,10 @@ var postRoutes = function(User,Post,Group){
                         for(let groupid of groups){
                             Group.findById(groupid,function (err,group) {
                                 var usersOfGroup = group.users;
-                                for(let userid of usersOfGroup){
-                                    User.findById(userid,addPostToUser);
+                                for(let userid2 of usersOfGroup){
+                                    if(userid2 != userid){
+                                        User.findById(userid2,addPostToUser);
+                                    }
                                 }
                             });
                         }
