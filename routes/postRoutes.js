@@ -3,6 +3,39 @@
  */
 var express = require("express");
 
+function addPostToUser (err,friendObj) {
+    //push the post to that friend
+    friendObj.posts.push(post._id);
+    friendObj.update({ $set: {posts: friendObj.posts}},{},function () {
+        console.log("added the post with id " + post._id + " to the newsfeed of user with id " + friend);
+    });
+
+    //loop through the subscriptions of the friend
+    var subscriptions = friendObj.subs;
+    var match = false;
+    for(let sub of subscriptions){
+        if(sub.subtype === "category" && sub.value === post.category){
+            match = true;
+        }else if(sub.subtype === "tag" && sub.value === post.tag){
+            match = true;
+        }else if(sub.subtype === "keyword" && post.title.includes(sub.value)){
+            match = true;
+        }
+    }
+
+    if(match){
+        var news = {
+            title: user.name + " made a post called \"" + post.title +"\"",
+            address: post.address,
+            postid: post._id
+        };
+        friendObj.news.push(news);
+        friendObj.update({$set: {news:friendObj.news}},{},function () {
+            console.log("Added a news object to user with id " + friendObj._id);
+        });
+    }
+}
+
 var postRoutes = function(User,Post,Group){
     var router = express.Router();
     router.route("/posts")
@@ -36,42 +69,18 @@ var postRoutes = function(User,Post,Group){
                     if(post.groups.length === 0){
                         var friends = user.friends;
                         for(let friend of friends){
-                            User.findById(friend,function (err,friendObj) {
-                                //push the post to that friend
-                                friendObj.posts.push(post._id);
-                                friendObj.update({ $set: {posts: friendObj.posts}},{},function () {
-                                    console.log("added the post with id " + post._id + " to the newsfeed of user with id " + friend);
-                                });
-
-                                //loop through the subscriptions of the friend
-                                var subscriptions = friendObj.subs;
-                                var match = false;
-                                for(let sub of subscriptions){
-                                    if(sub.subtype === "category" && sub.value === post.category){
-                                        match = true;
-                                    }else if(sub.subtype === "tag" && sub.value === post.tag){
-                                        match = true;
-                                    }else if(sub.subtype === "keyword" && post.title.includes(sub.value)){
-                                        match = true;
-                                    }
-                                }
-
-                                if(match){
-                                    var news = {
-                                        title: user.name + " made a post called \"" + post.title +"\"",
-                                        address: post.address,
-                                        postid: post._id
-                                    };
-                                    friendObj.news.push(news);
-                                    friendObj.update({$set: {news:friendObj.news}},{},function () {
-                                        console.log("Added a news object to user with id " + friendObj._id);
-                                    });
-                                }
-
-                            });
+                            User.findById(friend,addPostToUser);
                         }
                     }else{
-
+                        var groups = post.groups;
+                        for(let groupid of groups){
+                            Group.findById(groupid,function (err,group) {
+                                var usersOfGroup = group.users;
+                                for(let userid of usersOfGroup){
+                                    User.findById(userid,addPostToUser);
+                                }
+                            });
+                        }
                     }
                 }
             });
@@ -191,7 +200,9 @@ var postRoutes = function(User,Post,Group){
                                 var status = {
                                     title: "Your request for the post " + post.title,
                                     status: "requested",
-                                    postid: post._id
+                                    postid: post._id,
+                                    //this variable used for rating the poster
+                                    personid: post.user.id
                                 };
                                 user.statuses.push(status);
                                 user.update({$set:{statuses:user.statuses}},{},function () {
@@ -264,14 +275,21 @@ var postRoutes = function(User,Post,Group){
                         post.save();
                     }else if(type === "remove"){
                         User.findById(personid,function (err,user) {
-                            for(let i = 0; i < user.statuses.length; ++i){
-                                if(status.postid === postid){
-                                    user.statuses.splice(i,1);
-                                    user.update({$set:{statuses:user.statuses}},{},function () {
-                                        console.log("Removed status from user with id " + personid);
-                                    });
+                            if(user != null){
+                                var statuses = user.statuses;
+                                for(let i = 0; i < statuses.length; ++i){
+                                    var status = statuses[i];
+                                    if(status.postid === postid){
+                                        user.statuses.splice(i,1);
+                                        user.update({$set:{statuses:user.statuses}},{},function () {
+                                            console.log("Removed status from user with id " + personid);
+                                        });
+                                    }
                                 }
+                            }else{
+                                console.log("could not find the user with is " + personid);
                             }
+
                         });
                     }
                 }

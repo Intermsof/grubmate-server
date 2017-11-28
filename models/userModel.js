@@ -35,7 +35,9 @@ var userModel = new Schema({
         title:String,
         //requested, confirmed, rejected or ended
         status:String,
-        postid:String
+        postid:String,
+        //this variable used for rating the poster
+        personid:String
     }],
     postsOfUser:[String]
 });
