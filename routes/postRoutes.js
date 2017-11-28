@@ -272,13 +272,17 @@ var postRoutes = function(User,Post,Group){
                             post.update({$set:{pending:post.pending}},{},function () {
                                 console.log("Poster with id " + post.user.id + " has rejected a request");
                             });
+
                             //update the status of the rejected user
                             User.findById(personid,function (err,user) {
                                 for(let status of user.statuses){
                                     if(status.postid === post._id){
+                                        console.log("im here");
                                         status.status = "rejected";
+                                        break;
                                     }
                                 }
+                                console.log(user.statuses);
                                 user.update({$set:{statuses:user.statuses}},{},function () {
                                     console.log("User with id" + personid + " was rejected, and their status has been updated" );
                                 });
