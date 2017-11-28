@@ -3,38 +3,7 @@
  */
 var express = require("express");
 
-function addPostToUser (err,friendObj) {
-    //push the post to that friend
-    friendObj.posts.push(post._id);
-    friendObj.update({ $set: {posts: friendObj.posts}},{},function () {
-        console.log("added the post with id " + post._id + " to the newsfeed of user with id " + friend);
-    });
 
-    //loop through the subscriptions of the friend
-    var subscriptions = friendObj.subs;
-    var match = false;
-    for(let sub of subscriptions){
-        if(sub.subtype === "category" && sub.value === post.category){
-            match = true;
-        }else if(sub.subtype === "tag" && sub.value === post.tag){
-            match = true;
-        }else if(sub.subtype === "keyword" && post.title.includes(sub.value)){
-            match = true;
-        }
-    }
-
-    if(match){
-        var news = {
-            title: user.name + " made a post called \"" + post.title +"\"",
-            address: post.address,
-            postid: post._id
-        };
-        friendObj.news.push(news);
-        friendObj.update({$set: {news:friendObj.news}},{},function () {
-            console.log("Added a news object to user with id " + friendObj._id);
-        });
-    }
-}
 
 var postRoutes = function(User,Post,Group){
     var router = express.Router();
@@ -65,6 +34,39 @@ var postRoutes = function(User,Post,Group){
                         console.log("added the post with id " + post._id + " to the history of user with id " + userid);
                     });
 
+
+                    var addPostToUser = function (err,friendObj) {
+                        //push the post to that friend
+                        friendObj.posts.push(post._id);
+                        friendObj.update({ $set: {posts: friendObj.posts}},{},function () {
+                            console.log("added the post with id " + post._id + " to the newsfeed of user with id " + friend);
+                        });
+
+                        //loop through the subscriptions of the friend
+                        var subscriptions = friendObj.subs;
+                        var match = false;
+                        for(let sub of subscriptions){
+                            if(sub.subtype === "category" && sub.value === post.category){
+                                match = true;
+                            }else if(sub.subtype === "tag" && sub.value === post.tag){
+                                match = true;
+                            }else if(sub.subtype === "keyword" && post.title.includes(sub.value)){
+                                match = true;
+                            }
+                        }
+
+                        if(match){
+                            var news = {
+                                title: user.name + " made a post called \"" + post.title +"\"",
+                                address: post.address,
+                                postid: post._id
+                            };
+                            friendObj.news.push(news);
+                            friendObj.update({$set: {news:friendObj.news}},{},function () {
+                                console.log("Added a news object to user with id " + friendObj._id);
+                            });
+                        }
+                    };
                     //case: no groups specified in the post, so the post will be shown to all friends of the user
                     if(post.groups.length === 0){
                         var friends = user.friends;
