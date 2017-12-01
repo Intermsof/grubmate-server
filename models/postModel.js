@@ -25,7 +25,23 @@ var postModel = new Schema({
     numAvailable:Number,
     pending:[String],
     confirmed:[String],
-    groups:[String]
+    groups:[String],
+    requestHistory:[{
+        userid:String,
+        time:{
+            type:Date,
+            default: Date.now
+        }
+    }],
+    transactions:[{
+        userid:String,
+        timeRequested:Date,
+        timeConfirmed:{
+            type:Date,
+            default: Date.now
+        },
+        timeEnded:Date
+    }]
 });
 
 module.exports = mongoose.model("Post", postModel);

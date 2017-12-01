@@ -124,6 +124,19 @@ var postRoutes = function(User,Post,Group){
                 }
             });
         })
+        .delete(function (req,res) {
+            var postid = req.query.postid;
+            Post.findById(postid,function (err,post) {
+                if(post.transactions.length === 0){
+                    post.remove(function () {
+                        console.log("successfully removed the post with id " + postid);
+                        res.send("1");
+                    });
+                }else{
+                    res.send("0");
+                }
+            });
+        })
         .put(function (req,res) {
             var type = req.query.type;
             var personid = req.query.personid;
@@ -140,7 +153,7 @@ var postRoutes = function(User,Post,Group){
                         if(post.pending.indexOf(personid) !== -1 && post.confirmed.indexOf(personid) === -1){
                             post.confirmed.push(personid);
                             post.pending.splice(post.pending.indexOf(personid),1);
-                            post.update({$set:{confirmed:post.confirmed}},{},function () {
+                            post.update({$set:{confirmed:post.confirmed,numAvailable:(post.numAvailable - 1)}},{},function () {
                                 console.log("The request of the user with id " + personid
                                     + " on post " + post._id + " has been confirmed.");
                             });
@@ -148,6 +161,24 @@ var postRoutes = function(User,Post,Group){
                             post.update({$set:{pending:post.pending}},{},function () {
                                 console.log("The request of the user with id " + personid
                                     + " on post " + post._id + " has been removed from pending.");
+                            });
+
+                            var timeRequested;
+                            for(let i = post.requestHistory.length; i > -1; --i){
+                                if(post.requestHistory[i].userid === personid){
+                                    timeRequested = post.requestHistory[i].time;
+                                    console.log("found matching request; time =  " +  timeRequested);
+                                    break;
+                                }
+                            }
+                            var transaction = {
+                                userid:personid,
+                                timeRequested: timeRequested,
+                                timeConfirmed: Date.now()
+                            };
+
+                            post.update({$push:{transactions:transaction}},{},function () {
+                                console.log("Saved a transaction variable for the post with id " + post._id);
                             });
 
                             //update the status for the requester
@@ -192,6 +223,23 @@ var postRoutes = function(User,Post,Group){
                             post.update({$set:{confirmed:post.confirmed}},{},function () {
                                 console.log("The confirmed user with id " + personid + " has been terminated");
                             });
+
+                            //find location of most frequest transaction matching id
+                            var index = post.transactions.length;
+                            for(; index > -1; --index){
+                                if(post.transactions[index].userid === personid){
+                                    post.transactions[index].timeEnded = Date.now();
+                                }
+                            }
+
+                            //create a time for request history ending
+                            var queryString = ("transactions." + index + ".timeEnded");
+                            if( index != -1){
+                                post.update({$set:{ transactions: post.transactions}},{},function () {
+                                    console.log("updated the end time of transaction variable for the post with id " + post._id);
+                                });
+                            }
+
 
                             //update status object for requester
                             User.findById(personid,function (err,user) {
