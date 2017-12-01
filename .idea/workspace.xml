@@ -97,8 +97,8 @@
       <file leaf-file-name="postModel.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/models/postModel.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="8" column="19" lean-forward="false" selection-start-line="8" selection-start-column="19" selection-end-line="8" selection-end-column="19" />
+            <state relative-caret-position="153">
+              <caret line="9" column="16" lean-forward="false" selection-start-line="9" selection-start-column="16" selection-end-line="9" selection-end-column="16" />
               <folding />
             </state>
           </provider>
@@ -376,7 +376,7 @@
       <workItem from="1511252067253" duration="1612000" />
       <workItem from="1511844275242" duration="2426000" />
       <workItem from="1511848271955" duration="6095000" />
-      <workItem from="1512090762133" duration="70000" />
+      <workItem from="1512090762133" duration="853000" />
     </task>
     <servers />
   </component>
@@ -413,7 +413,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="176350000" />
+    <option name="totallyTimeSpent" value="177133000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -779,8 +779,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/models/postModel.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="19" lean-forward="false" selection-start-line="8" selection-start-column="19" selection-end-line="8" selection-end-column="19" />
+        <state relative-caret-position="153">
+          <caret line="9" column="16" lean-forward="false" selection-start-line="9" selection-start-column="16" selection-end-line="9" selection-end-column="16" />
           <folding />
         </state>
       </provider>

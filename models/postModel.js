@@ -7,6 +7,7 @@ var postModel = new Schema({
     title: String,
     startTime: String,
     endTime:String,
+    kind:String,
     images:[String],
     status:Boolean,
     price:String,
