@@ -126,6 +126,7 @@ var postRoutes = function(User,Post,Group){
         })
         .delete(function (req,res) {
             var postid = req.query.postid;
+            console.log("here " + postid);
             Post.findById(postid,function (err,post) {
                 console.log(post);
                 console.log(post.transactions);
