@@ -60,19 +60,29 @@ var userRoutes = function(User,Post,Group){
         //this function is for updating ratings
         var userid = req.query.userid;
         var rating = req.query.rate;
-        User.findById(userid,function (err,user) {
-            user.rating = ((user.rating * user.numRating) + parseFloat(rating)) / (user.numRating + 1);
-            user.numRating += 1;
+        var type = req.query.type;
 
-            res.json(user.rating);
-            user.update({
-                $set:{
-                    rating:user.rating,
-                    numRating:user.numRating
-                }
-            },{},function () {
-                console.log("updated the rating of the user with id " + userid);
-            });
+        User.findById(userid,function (err,user) {
+            if(!type){
+                user.rating = ((user.rating * user.numRating) + parseFloat(rating)) / (user.numRating + 1);
+                user.numRating += 1;
+
+                res.json(user.rating);
+                user.update({
+                    $set:{
+                        rating:user.rating,
+                        numRating:user.numRating
+                    }
+                },{},function () {
+                    console.log("updated the rating of the user with id " + userid);
+                });
+            }else if(type === "block"){
+                var personid = req.query.personid;
+                user.update({$push:{blocked:personid}},{},function () {
+                    console.log(personid + " blocked " + userid)
+                });
+            }
+
         });
     });
 

@@ -39,7 +39,8 @@ var userModel = new Schema({
         //this variable used for rating the poster
         personid:String
     }],
-    postsOfUser:[String]
+    postsOfUser:[String],
+    blocked:[String]
 });
 
 
