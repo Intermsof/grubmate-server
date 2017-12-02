@@ -7,6 +7,13 @@ var subscriptionRoutes = function (User,Post,Group) {
 
     var router = express.Router();
     router.route("/subs")
+        .get(function(req,res){
+            var userid = req.query.userid;
+            User.findById(userid,function (err,user) {
+                console.log("responding to subs call");
+                res.json(user.subs);
+            });
+        })
         .post(function(req,res){
             var userid = req.query.userid;
             var sub = req.body;
