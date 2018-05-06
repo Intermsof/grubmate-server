@@ -1,7 +1,7 @@
 # grubmate-server
 
-A RESTful API created in Node.js and express.js. Used MongoDB as a database and Mongoose as an ORM.
-The 16 endpoints served by this API can be found at the link below
+A RESTful API created in <b>Node.js</b> and <b>express.js</b>. 
+The <b>16 endpoints</b> served by this API can be found at the link below
 
 https://app.swaggerhub.com/apis/intermsof5/grubmate/1.0.0#/notification/get_singlenotif
 
